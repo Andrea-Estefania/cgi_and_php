@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+FILE               : php-zoo.html
+PROJECT            : PROG2001 - Assignment #3
+PROGRAMMER         : Andrea Ferro  
+FIRST VERSION      : 2021-10-11
+DESCRIPTION        :
+       This files allows the user to interact with a form to give its name and choose their favorite animal from a list of 
+       animals previously selected. It has a reference to a javascript file for the validation of the files that need to be submitted 
+       to the server side of the program. This version in particular uses the METHOD="POST" and submits the information provided by the
+       user to a php file.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SET Zoo</title>
+    <script src="./myJS/index.js" type="text/javascript"></script> <!-- Reference to the Javascript file with the validation functions-->
+    
+    <!--
+      Title: Bootstrap Style Sheets
+      Author: @mdo and @fat
+      Date: August 19, 2015.
+      Version: 2015 - 09 - 19
+      Availability: https://getbootstrap.com/docs/5.1/getting-started/introduction/
+    -->
+    
+    <link 
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />   <!-- Using Bootstrap 4 for styling-->
+
+
+    <!--Internal Style for the form with which the user interacts -->
+    <style>
+      body { 
+        background-color: #e5e5e5;
+      }
+      .myContainer {
+        margin: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn {
+        background-color: #242f40;
+      }
+
+      #userFeedback {
+        display: none;
+        margin-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="myContainer d-flex justify-content-center">
+      <h1 class="display-4">Welcome to the</h1>
+      <h1 class="display-2">SETZoo</h1>
+      <!--Main form where the users registers and picks its favorite animal from the Zoo-->
+      <form
+        name="myForm"
+        class="form-inline"
+        action="animals.php"
+        method="POST"
+        onsubmit="return checkAnimal();"
+      >
+      <!--Block of the form that asks the user for its name-->
+        <div class="form-group" id="nameSection" name="myForm">
+          <input
+            type="text"
+            class="form-control"
+            id="userName"
+            name="userName"
+            placeholder="Your name"
+          />
+          <!--Submits the first part of the form after validation has been made-->
+          <input
+            type="button"
+            id="submitName"
+            class="btn btn-primary"
+            value="Submit"
+            onclick="checkName();"
+          />
+          <!-- Button to validate the name-->
+        </div>
+        <!--Block of the form that asks the user for its favorite animal in the Zoo-->
+        <div id="animalSection" name="myForm" style="display: none">
+          Please Select an animal:
+          <select name="userAnimal" id="selectAnimal">
+            <option value="">&nbsp</option>
+            <option value="Rabbit">Rabbit</option>
+            <option value="Fox">Fox</option>
+            <option value="Panda">Panda</option>
+            <option value="Tiger">Tiger</option>
+            <option value="Wolf">Wolf</option>
+            <option value="Axolotl">Axolotl</option>
+          </select>
+          <!--Submit the form action-->
+          <input
+            type="submit"
+            name="send"
+            id="submitAnimal"
+            class="btn btn-primary"
+            value="Submit"
+            onclick="checkAnimal();"
+          />
+        </div>
+        <!--Saves the information that needs to be submitted to the form-->
+        <input type="hidden" name="theName" value="" />
+        <input type="hidden" name="theAnimal" value="" />
+      </form>
+      <!--Feedback for the user in case of errors-->
+      <div id="userFeedback" name="send" class="alert alert-danger"></div>
+    </div>
+
+    <!--Javascript references for the use of Bootstrap JS 
+    Bootstrap recommends to include this scripts right before the closing body tag-->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
